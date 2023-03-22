@@ -53,7 +53,7 @@ namespace dtp7_contact_list
                     Console.WriteLine("Goodbye!");
                 }
                 // NYI: IMPORTANT
-                else if (commandLine[0] == "delete")
+                else if (commandLine[0] == "delete") //TODO: Lägg in utskrift om att användare ej finns!
                 {
                     if (commandLine.Length == 1)
                     {
