@@ -222,27 +222,25 @@ namespace dtp7_contact_list
 
         private static void LoadContactListFromFile(string lastFileName)
         {
+            try
             {
-                try
+                int numLines = 0;
+                using (StreamReader infile = new StreamReader(lastFileName))
                 {
-                    int numLines = 0;
-                    using (StreamReader infile = new StreamReader(lastFileName))
+                    string line;
+                    while ((line = infile.ReadLine()) != null)
                     {
-                        string line;
-                        while ((line = infile.ReadLine()) != null)
-                        {
-                            LoadContact(line);
-                            numLines++;
-                        }
+                        LoadContact(line);
+                        numLines++;
                     }
                 }
-                catch (System.IO.FileNotFoundException)
-                {
-                    Console.WriteLine("could not find file addresses.lis!");
-                }
+                Console.WriteLine($"INFO: Number of persons loaded: {numLines}");
+            }
+            catch (System.IO.FileNotFoundException)
+            {
+                Console.WriteLine($"Could not find file: {lastFileName}");
             }
         }
-
         private static void LoadContact(string lineFromAddressFile)
         {
             string[] attrs = lineFromAddressFile.Split('|');
