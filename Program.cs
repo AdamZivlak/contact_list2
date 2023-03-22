@@ -221,14 +221,24 @@ namespace dtp7_contact_list
         }
 
         private static void LoadContactListFromFile(string lastFileName)
-        {   
-            using (StreamReader infile = new StreamReader(lastFileName)) //FIX ME!! System.IO.FileNotFoundException: 'Could not find file 'C:\Users\Adamz\address.lis'.'
+        {
             {
-                string line;
-                while ((line = infile.ReadLine()) != null)
+                try
                 {
-
-                    LoadContact(line); // Also prints the line loaded
+                    int numLines = 0;
+                    using (StreamReader infile = new StreamReader(lastFileName))
+                    {
+                        string line;
+                        while ((line = infile.ReadLine()) != null)
+                        {
+                            LoadContact(line);
+                            numLines++;
+                        }
+                    }
+                }
+                catch (System.IO.FileNotFoundException)
+                {
+                    Console.WriteLine("could not find file addresses.lis!");
                 }
             }
         }
